@@ -28,3 +28,9 @@ pthread_barrier_init(&barrier, NULL, 3);  // 3 wątki muszą dojść
 printf("Wątek robi coś...\n");
 pthread_barrier_wait(&barrier);           // czeka na pozostałe wątki
 printf("Wszyscy wątki gotowe – ruszamy dalej\n");
+
+pthread_barrierattr_t attr;
+pthread_barrierattr_init(&attr);
+pthread_barrierattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
+
+pthread_barrier_init(&barrier, &attr, 3);
